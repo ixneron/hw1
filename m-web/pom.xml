@@ -40,19 +40,19 @@
             <version>1.7.21</version>
         </dependency>
 
-        <!-- atomikos - jta -->
-        <dependency>
-            <groupId>com.atomikos</groupId>
-            <artifactId>transactions-jta</artifactId>
-            <version>4.0.4</version>
-        </dependency>
+        <!--&lt;!&ndash; atomikos - jta &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>com.atomikos</groupId>-->
+            <!--<artifactId>transactions-jta</artifactId>-->
+            <!--<version>4.0.4</version>-->
+        <!--</dependency>-->
 
-        <!-- atomikos -jms -->
-        <dependency>
-            <groupId>com.atomikos</groupId>
-            <artifactId>transactions-jms</artifactId>
-            <version>4.0.4</version>
-        </dependency>
+        <!--&lt;!&ndash; atomikos -jms &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>com.atomikos</groupId>-->
+            <!--<artifactId>transactions-jms</artifactId>-->
+            <!--<version>4.0.4</version>-->
+        <!--</dependency>-->
 
         <!-- javax.transaction/jta -->
         <dependency>

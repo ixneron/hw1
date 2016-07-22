@@ -6,6 +6,6 @@
     <meta charset="utf-8">
 </head>
 <body>
-    <a role="button" href="/main"> СТАРТ </a>
+    <a role="button" href="/main" > СТАРТ </a>
 </body>
 </html>

@@ -12,15 +12,12 @@
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <file>C:/JAVA/ibm_sphera/profiles/AppSrv03/logs/testFileQ.log</file>
         <append>true</append>
-        <!-- encoders are assigned the type
-             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
         <encoder>
             <pattern>%d{yyyy-MM-dd HH:mm:ss} %highlight(%-5level) %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
-
-    <root level="info">
+    <root level="error">
         <appender-ref ref="FILE" />
     </root>
 
