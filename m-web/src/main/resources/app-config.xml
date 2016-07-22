@@ -7,45 +7,9 @@
        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
 
 
-    <!-- CONNECTION FACTORY -->
-    <!--<bean id="activeMQConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">-->
-    <!--<constructor-arg index="0" value="tcp://192.168.148.130:61616"/>-->
-    <!--</bean>-->
-    <!--&lt;!&ndash; xa res1 &ndash;&gt;-->
-    <!--<bean id="xaFactory" class="org.apache.activemq.ActiveMQXAConnectionFactory">-->
-    <!--<property name="brokerURL" value="tcp://192.168.148.130:61616"/>-->
-    <!--<property name="redeliveryPolicy" ref="redeliveryPolicy"/>-->
-    <!--</bean>-->
-
-    <!--<bean id="atomikosConnectionFactory" class="com.atomikos.jms.AtomikosConnectionFactoryBean">-->
-    <!--<property name="xaConnectionFactory" ref="xaFactory"/>-->
-    <!--<property name="uniqueResourceName" value="amQueue"/>-->
-    <!--</bean>-->
-    <!--&lt;!&ndash; xa res2 &ndash;&gt;-->
-    <!--<bean id="xaFactory2" class="org.apache.activemq.ActiveMQXAConnectionFactory">-->
-    <!--<property name="brokerURL" value="tcp://192.168.148.130:61616"/>-->
-    <!--</bean>-->
-
-    <!--<bean id="atomikosConnectionFactory2" class="com.atomikos.jms.AtomikosConnectionFactoryBean">-->
-    <!--<property name="xaConnectionFactory" ref="xaFactory2"/>-->
-    <!--<property name="uniqueResourceName" value="amQueue2"/>-->
-    <!--</bean>-->
-    <!--<bean id="ibmConnectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean">-->
-    <!--<property name="jndiName" value="jms/WasConnectionFactory"/>-->
-    <!--<property name="lookupOnStartup" value="false"/>-->
-    <!--<property name="cache" value="true"/>-->
-    <!--<property name="proxyInterface" value="javax.jms.ConnectionFactory"/>-->
-    <!--</bean>-->
     <jee:jndi-lookup id="ibmConnectionFactory" jndi-name="jms/WasConnectionFactory"/>
     <jee:jndi-lookup id="ibmTopicCF" jndi-name="jms/topiccf"/>
 
-    <!-- redelivery policy -->
-    <!--<bean id="redeliveryPolicy" class="org.apache.activemq.RedeliveryPolicy">-->
-    <!--<property name="initialRedeliveryDelay" value="1000"/>-->
-    <!--<property name="redeliveryDelay" value="1000"/>-->
-    <!--<property name="maximumRedeliveries" value="0"/>-->
-    <!--<property name="queue" value="ActiveMQ.DLQ"/>-->
-    <!--</bean>-->
 
     <bean id="errorHandler" class="hw1.util.MyErrorHandler"/>
 

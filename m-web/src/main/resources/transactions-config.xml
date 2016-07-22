@@ -8,42 +8,9 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-    <!--&lt;!&ndash; atomikos sys. props &ndash;&gt;-->
-    <!--<bean id="setMyAtomikosSystemProps"-->
-          <!--class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">-->
-        <!--<property name="targetObject">-->
-            <!--&lt;!&ndash; System.getProperties() &ndash;&gt;-->
-            <!--<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">-->
-                <!--<property name="targetClass" value="java.lang.System"/>-->
-                <!--<property name="targetMethod" value="getProperties"/>-->
-            <!--</bean>-->
-        <!--</property>-->
-        <!--<property name="targetMethod" value="putAll"/>-->
-        <!--<property name="arguments">-->
-            <!--&lt;!&ndash; The new Properties &ndash;&gt;-->
-            <!--<util:properties>-->
-                <!--&lt;!&ndash;<prop key="com.atomikos.icatch.file">/etc/myapp/jta.properties</prop>&ndash;&gt;-->
-                <!--&lt;!&ndash;<prop key="com.atomikos.icatch.hide_init_file_path">true</prop>&ndash;&gt;-->
-                <!--<prop key="com.atomikos.icatch.registered">true</prop>-->
-            <!--</util:properties>-->
-        <!--</property>-->
-    <!--</bean>-->
-    <!---->
-    <!--&lt;!&ndash; настройка транзакций &ndash;&gt;-->
-    <!--<bean id="jtaTransactionManager" class="com.atomikos.icatch.jta.UserTransactionManager"-->
-    <!--init-method="init" destroy-method="close">-->
-    <!--<property name="forceShutdown" value="false"/>-->
-    <!--</bean>-->
 
-    <!--<bean id="jtaUserTransactionManager" class="com.atomikos.icatch.jta.UserTransactionImp">-->
-    <!--<property name="transactionTimeout" value="300"/>-->
-    <!--</bean>-->
+    <bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager">
+    </bean>
 
-    <!--<bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager">-->
-    <!--<property name="transactionManager" ref="jtaTransactionManager"/>-->
-    <!--<property name="userTransaction" ref="jtaUserTransactionManager"/>-->
-    <!--</bean>-->
-
-
-    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>

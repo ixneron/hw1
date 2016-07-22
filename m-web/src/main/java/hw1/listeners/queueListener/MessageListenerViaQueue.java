@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.jms.*;
 
@@ -25,20 +27,19 @@ public class MessageListenerViaQueue implements MessageListener {
     @Override
     public void onMessage(Message message) {
 
-        if (message instanceof TextMessage){
+        if (message instanceof TextMessage) {
             TextMessage textMessage = (TextMessage) message;
             try {
 
-                if (textMessage.getText().contains("roma - resender")){
+                if (textMessage.getText().contains("roma - resender")) {
                     logger.error("получено сообщение из первой очереди, оформляем посылку во вторую очередь + активируем");
                     sendToDoubleQueue(textMessage);
-                }
-                else if (textMessage.getText().contains("katya-transaction")){ //создает эксепшн для теста
+                } else if (textMessage.getText().contains("katya-transaction")) { //создает эксепшн для теста
                     if (true) {
                         int[] mas = new int[5];
                         mas[6] = 10;
                     }
-                } else  Magic.createMagic(message, logger, marshaller);
+                } else Magic.createMagic(message, logger, marshaller);
 
             } catch (JMSException e) {
                 e.printStackTrace();
@@ -46,6 +47,7 @@ public class MessageListenerViaQueue implements MessageListener {
         }
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     private void sendToDoubleQueue(final TextMessage textMessage) {
 
         jmsTemplate.send(new MessageCreator() {

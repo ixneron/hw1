@@ -27,7 +27,7 @@
     <property name="messageListener" ref="listenerViaDoubleQueue"/>
     <property name="errorHandler" ref="errorHandler"/>
 
-    <!--<property name="transactionManager" ref="transactionManager"/>-->
+    <property name="transactionManager" ref="transactionManager"/>
     <property name="sessionTransacted" value="true"/>
     </bean>
 
@@ -37,7 +37,7 @@
     <property name="messageListener" ref="listenerViaQueue"/>
     <property name="errorHandler" ref="errorHandler"/>
 
-    <!--<property name="transactionManager" ref="transactionManager"/>-->
+    <property name="transactionManager" ref="transactionManager"/>
     <property name="sessionTransacted" value="true"/>
     </bean>
     <!-- topic hw1.listeners -->

@@ -32,7 +32,7 @@ public class Test {
         logger.error("===================================================================================================================");
         logger.error("тестируем второй сценарий (отправка в топик, когда клиенты оффлайн (потеря сообщений)");
         logger.error("===================================================================================================================");
-        testOfflineConsumer(messageSenderViaQueue,messageSenderViaTopic,topicListenerFirst,topicListenerSecond,topicListenerNonDur);
+        testOfflineConsumer(messageSenderViaQueue, messageSenderViaTopic, topicListenerFirst, topicListenerSecond, topicListenerNonDur);
 
         Thread.sleep(2000);
 
@@ -50,7 +50,7 @@ public class Test {
 
         logger.error("тестируем третий сценарий (отправка в топик, когда клиент оффлайн и получение сообщения, когда клиент залогинился");
         logger.error("=================================================================================================================== ");
-        testDurableConsumer(messageSenderViaQueue,messageSenderViaTopic,topicListenerFirst,topicListenerSecond,topicListenerNonDur);
+        testDurableConsumer(messageSenderViaQueue, messageSenderViaTopic, topicListenerFirst, topicListenerSecond, topicListenerNonDur);
 
         Thread.sleep(2000);
 
