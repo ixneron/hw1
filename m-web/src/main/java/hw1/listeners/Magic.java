@@ -1,4 +1,4 @@
-package reqs;
+package hw1.listeners;
 
 import generated.Card;
 import org.slf4j.Logger;
@@ -18,7 +18,7 @@ public class Magic {
             TextMessage textMessage = (TextMessage) message;
             try {
                 Card card = (Card) marshaller.unmarshal(new StreamSource(new StringReader(textMessage.getText())));
-                logger.info("получено сообщение || владелец карты : " + card.getCardOwner() + "|| лимит : " + card.getCardLimit() + "|| статус : " + card.getCardStatus() + " || " + message.getJMSMessageID());
+                logger.error("получено сообщение || владелец карты : " + card.getCardOwner() + "|| лимит : " + card.getCardLimit() + "|| статус : " + card.getCardStatus() + " || ");
             } catch (JMSException e) {
                 e.printStackTrace();
             }

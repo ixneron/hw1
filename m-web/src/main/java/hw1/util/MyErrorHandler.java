@@ -1,4 +1,4 @@
-package reqs;
+package hw1.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

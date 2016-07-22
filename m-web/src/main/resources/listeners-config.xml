@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- BEANS LISTENER -->
+    <bean id="listenerViaQueue" class="hw1.listeners.queueListener.MessageListenerViaQueue"/>
+    <bean id="listenerViaTopicFirstClient" class="hw1.listeners.topicListener.MessageListenerViaTopicFirstClient"/>
+    <bean id="listenerViaTopicSecondClient" class="hw1.listeners.topicListener.MessageListenerViaTopicSecondClient"/>
+    <bean id="listenerViaTopicNonDur" class="hw1.listeners.topicListener.MessageListenerViaTopicNonDur"/>
+    <bean id="listenerViaDoubleQueue" class="hw1.listeners.queueListener.MessageListenerViaDoubleQueue"/>
+    <bean id="listenerViaQueueDLQ" class="hw1.listeners.queueListener.MessageListenerViaQueueDLQ"/>
+
+    <!-- DEFAULT MESSAGE LISTENER -->
+    <bean id="queueListenerDLQ" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+    <property name="connectionFactory" ref="ibmConnectionFactory"/>
+    <property name="destination" ref="destinationQDLQ"/>
+    <property name="messageListener" ref="listenerViaQueueDLQ"/>
+    </bean>
+
+    <!-- queue hw1.listeners -->
+    <bean id="doubleQueueListner" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+    <property name="connectionFactory" ref="ibmConnectionFactory"/>
+    <property name="destination" ref="destination2Queue"/>
+    <property name="messageListener" ref="listenerViaDoubleQueue"/>
+    <property name="errorHandler" ref="errorHandler"/>
+
+    <!--<property name="transactionManager" ref="transactionManager"/>-->
+    <property name="sessionTransacted" value="true"/>
+    </bean>
+
+    <bean id="queueListener" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+    <property name="connectionFactory" ref="ibmConnectionFactory"/>
+    <property name="destination" ref="destinationQueue"/>
+    <property name="messageListener" ref="listenerViaQueue"/>
+    <property name="errorHandler" ref="errorHandler"/>
+
+    <!--<property name="transactionManager" ref="transactionManager"/>-->
+    <property name="sessionTransacted" value="true"/>
+    </bean>
+    <!-- topic hw1.listeners -->
+    <bean id="topicListenerNonDur" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="ibmTopicCF"/>
+        <property name="destination" ref="destinationTopic"/>
+        <property name="pubSubDomain" value="true"/>
+        <property name="messageListener" ref="listenerViaTopicNonDur"/>
+    </bean>
+
+    <bean id="topicListenerFirst" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+    <property name="connectionFactory" ref="ibmTopicCF"/>
+    <property name="destination" ref="destinationTopic"/>
+    <property name="pubSubDomain" value="true"/>
+    <property name="messageListener" ref="listenerViaTopicFirstClient"/>
+    <property name="subscriptionDurable" value="true"/>
+    <property name="durableSubscriptionName" value="1005002"/>
+    <!--<property name="clientId" value="AndreyKuz"/>-->
+
+    </bean>
+
+    <bean id="topicListenerSecond" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+    <property name="connectionFactory" ref="ibmTopicCF"/>
+    <property name="destination" ref="destinationTopic"/>
+    <property name="pubSubDomain" value="true"/>
+    <property name="messageListener" ref="listenerViaTopicSecondClient"/>
+    <property name="subscriptionDurable" value="true"/>
+    <property name="durableSubscriptionName" value="1005001"/>
+    <!--<property name="clientId" value="1005010"/>-->
+    </bean>
+
+</beans>

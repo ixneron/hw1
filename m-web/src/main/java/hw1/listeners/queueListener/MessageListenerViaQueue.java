@@ -1,5 +1,6 @@
-package reqs;
+package hw1.listeners.queueListener;
 
+import hw1.listeners.Magic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +8,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.jms.*;
 
@@ -31,7 +30,7 @@ public class MessageListenerViaQueue implements MessageListener {
             try {
 
                 if (textMessage.getText().contains("roma - resender")){
-                    logger.info("получено сообщение из первой очереди, оформляем посылку во вторую очередь + активируем");
+                    logger.error("получено сообщение из первой очереди, оформляем посылку во вторую очередь + активируем");
                     sendToDoubleQueue(textMessage);
                 }
                 else if (textMessage.getText().contains("katya-transaction")){ //создает эксепшн для теста
@@ -47,7 +46,6 @@ public class MessageListenerViaQueue implements MessageListener {
         }
     }
 
-    @Transactional (propagation = Propagation.REQUIRED)
     private void sendToDoubleQueue(final TextMessage textMessage) {
 
         jmsTemplate.send(new MessageCreator() {

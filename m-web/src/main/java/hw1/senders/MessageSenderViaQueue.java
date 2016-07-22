@@ -1,4 +1,4 @@
-package reqs;
+package hw1.senders;
 
 import generated.Card;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -27,7 +25,6 @@ public class MessageSenderViaQueue {
     private Jaxb2Marshaller marshaller;
 
 
-    @Transactional (propagation = Propagation.REQUIRED)
     public void sendRequestToActivation(final Card card) {
         jmsTemplate.send(new MessageCreator() {
             @Override

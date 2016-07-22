@@ -1,4 +1,4 @@
-package reqs;
+package hw1.senders;
 
 import generated.Card;
 import org.springframework.beans.factory.annotation.Autowired;

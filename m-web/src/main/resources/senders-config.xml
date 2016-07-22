@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+    <context:component-scan base-package="hw1.senders"/>
+    <!-- JMS TEMPLATE -->
+    <bean id="jmsQueueTemplate" class="org.springframework.jms.core.JmsTemplate" scope="prototype">
+        <property name="connectionFactory" ref="ibmConnectionFactory"/>
+        <property name="receiveTimeout" value="1000"/>
+        <property name="defaultDestination" ref="destinationQueue"/>
+        <property name="sessionTransacted" value="true"/>
+    </bean>
+
+    <bean id="jms2QueueTemplate" class="org.springframework.jms.core.JmsTemplate" scope="prototype">
+        <property name="connectionFactory" ref="ibmConnectionFactory"/>
+        <property name="receiveTimeout" value="1000"/>
+        <property name="defaultDestination" ref="destination2Queue"/>
+    </bean>
+
+    <bean id="jmsTopicTemplate" class="org.springframework.jms.core.JmsTemplate" scope="prototype">
+        <property name="connectionFactory" ref="ibmConnectionFactory"/>
+        <property name="receiveTimeout" value="1000"/>
+        <property name="pubSubDomain" value="true"/>
+        <property name="defaultDestination" ref="destinationTopic"/>
+    </bean>
+
+    <!-- MESSAGE SENDERS -->
+    <bean class="hw1.senders.MessageSenderViaQueue"/>
+    <bean class="hw1.senders.MessageSenderViaTopic"/>
+
+</beans>

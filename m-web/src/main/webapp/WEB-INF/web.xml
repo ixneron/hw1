@@ -10,17 +10,25 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            /WEB-INF/classes/appCtx.xml
+            /WEB-INF/classes/app-config.xml,
+            /WEB-INF/classes/listeners-config.xml,
+            /WEB-INF/classes/senders-config.xml,
+            /WEB-INF/classes/transactions-config.xml
         </param-value>
     </context-param>
-    
+
     <servlet>
-        <servlet-name>myserv</servlet-name>
-        <servlet-class>reqs.MyServlet</servlet-class>
+        <servlet-name>spring</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/classes/servlet-config.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
     </servlet>
-    
     <servlet-mapping>
-        <servlet-name>myserv</servlet-name>
+        <servlet-name>spring</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
 </web-app>
