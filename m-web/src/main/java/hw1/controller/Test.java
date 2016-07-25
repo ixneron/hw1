@@ -50,7 +50,7 @@ public class Test {
 
         logger.error("тестируем третий сценарий (отправка в топик, когда клиент оффлайн и получение сообщения, когда клиент залогинился");
         logger.error("=================================================================================================================== ");
-        testDurableConsumer(messageSenderViaQueue, messageSenderViaTopic, topicListenerFirst, topicListenerSecond, topicListenerNonDur);
+        testDurableConsumer(messageSenderViaTopic, topicListenerFirst, topicListenerSecond, topicListenerNonDur);
 
         Thread.sleep(2000);
 
@@ -85,8 +85,7 @@ public class Test {
         messageSenderViaTopic.sendRequestToActivation(topicCard);
     }
 
-    public static void testDurableConsumer(MessageSenderViaQueue messageSenderViaQueue,
-                                           MessageSenderViaTopic messageSenderViaTopic,
+    public static void testDurableConsumer(MessageSenderViaTopic messageSenderViaTopic,
                                            DefaultMessageListenerContainer topicListenerFirst,
                                            DefaultMessageListenerContainer topicListenerSecond,
                                            DefaultMessageListenerContainer topicListenerNonDur) throws InterruptedException, IOException {
@@ -159,7 +158,6 @@ public class Test {
         resendCard.setCardLimit(0);
 
         messageSenderViaQueue.sendRequestToActivation(resendCard);
-
     }
 
     public static void testTransact(MessageSenderViaQueue messageSenderViaQueue) throws InterruptedException {

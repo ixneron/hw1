@@ -31,10 +31,10 @@ public class MessageListenerViaQueue implements MessageListener {
             TextMessage textMessage = (TextMessage) message;
             try {
 
-                if (textMessage.getText().contains("roma - resender")) {
+                if (textMessage.getText().contains("roma - resender")) { //отправка из A в B
                     logger.error("получено сообщение из первой очереди, оформляем посылку во вторую очередь + активируем");
                     sendToDoubleQueue(textMessage);
-                } else if (textMessage.getText().contains("katya-transaction")) { //создает эксепшн для теста
+                } else if (textMessage.getText().contains("katya-transaction")) { //создает эксепшн для теста 5 сценария
                     if (true) {
                         int[] mas = new int[5];
                         mas[6] = 10;

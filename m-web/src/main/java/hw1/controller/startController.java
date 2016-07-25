@@ -48,11 +48,7 @@ public class startController {
 
         try {
             Test.test(messageSenderViaQueue,messageSenderViaTopic,topicListenerFirst,topicListenerSecond,topicListenerNonDur);
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (JAXBException | IOException | InterruptedException e) {
             e.printStackTrace();
         }
         return "main";
