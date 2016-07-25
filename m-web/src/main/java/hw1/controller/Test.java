@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class Test {
 
-    private static Logger logger = LoggerFactory.getLogger(Test.class);
+    private static final Logger logger = LoggerFactory.getLogger(Test.class);
 
     public static void test(MessageSenderViaQueue messageSenderViaQueue,
                             MessageSenderViaTopic messageSenderViaTopic,
@@ -66,6 +66,7 @@ public class Test {
         logger.error("===================================================================================================================");
         testTransact(messageSenderViaQueue);
     }
+
 
     public static void testProducerAndConsumer(MessageSenderViaQueue messageSenderViaQueue, MessageSenderViaTopic messageSenderViaTopic) {
         Card queueCard = new Card();

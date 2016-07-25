@@ -1,23 +1,29 @@
 package hw1.listeners.topicListener;
 
+import generated.Card;
+import hw1.util.MessageConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import hw1.listeners.Magic;
 
+import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 
 public class MessageListenerViaTopicSecondClient implements MessageListener{
 
-    private static Logger logger = LoggerFactory.getLogger(MessageListenerViaTopicSecondClient.class);
+    private static final Logger logger = LoggerFactory.getLogger(MessageListenerViaTopicSecondClient.class);
 
     @Autowired
-    private Jaxb2Marshaller marshaller;
+    private MessageConverter messageConverter;
 
     @Override
     public void onMessage(Message message) {
-        Magic.createMagic(message, logger, marshaller);
+        try {
+            Card card = messageConverter.convertXmlToCard(message);
+            logger.error("получено сообщение || владелец карты : " + card.getCardOwner() + "|| лимит : " + card.getCardLimit() + "|| статус : " + card.getCardStatus() + " || ");
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
     }
 }

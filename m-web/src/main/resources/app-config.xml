@@ -26,4 +26,7 @@
         <property name="classesToBeBound" value="generated.Card"/>
         <property name="schema" value="/WEB-INF/classes/card.xsd"/>
     </bean>
+
+    <!-- CONVERTER -->
+    <bean class="hw1.util.MessageConverter"/>
 </beans>

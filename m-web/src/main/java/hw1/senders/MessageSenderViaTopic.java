@@ -1,15 +1,16 @@
 package hw1.senders;
 
 import generated.Card;
+import hw1.util.MessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
-import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
-import javax.jms.*;
-import javax.xml.transform.stream.StreamResult;
-import java.io.StringWriter;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.Session;
+import javax.jms.TextMessage;
 
 
 public class MessageSenderViaTopic {
@@ -19,8 +20,7 @@ public class MessageSenderViaTopic {
     private  JmsTemplate jmsTemplate;
 
     @Autowired
-    private Jaxb2Marshaller marshaller;
-
+    private MessageConverter messageConverter;
 
     public void sendRequestToActivation(final Card card) {
 
@@ -28,18 +28,10 @@ public class MessageSenderViaTopic {
             @Override
             public Message createMessage(Session session) throws JMSException {
                 TextMessage textMessage = session.createTextMessage();
-                textMessage.setText(MessageSenderViaTopic.this.convertObjToXML(card));
+                textMessage.setText(messageConverter.convertCardToXml(card));
                 return textMessage;
             }
         });
-    }
-
-    private String convertObjToXML (Card card) {
-
-        StringWriter writer = new StringWriter();
-        StreamResult result = new StreamResult(writer);
-        marshaller.marshal(card, result);
-        return writer.toString();
     }
 
 }

@@ -18,7 +18,7 @@ import java.io.IOException;
 @RequestMapping("/")
 public class startController {
 
-    private static Logger logger = LoggerFactory.getLogger(startController.class);
+    private static final Logger logger = LoggerFactory.getLogger(startController.class);
 
     @Autowired
     private MessageSenderViaTopic messageSenderViaTopic;
